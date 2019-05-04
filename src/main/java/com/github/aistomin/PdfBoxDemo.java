@@ -11,10 +11,10 @@ import org.apache.pdfbox.util.PDFTextStripperByArea;
 /**
  * Created by aistomin on 2019-05-01.
  * <p>
- * Class that demonstrates how to decrypt PDF files and read the content their
- * content.
+ * Class that demonstrates how to extract the content of the PDF files using
+ * PDFBox library.
  */
-public final class DecryptDemo {
+public final class PdfBoxDemo {
 
     /**
      * Entry point of the program :)
@@ -111,7 +111,7 @@ public final class DecryptDemo {
      */
     private static File resourceFile(final String name)
         throws Exception {
-        final URL resource = DecryptDemo.class.getClassLoader()
+        final URL resource = PdfBoxDemo.class.getClassLoader()
             .getResource(name);
         if (resource == null) {
             throw new Exception(
