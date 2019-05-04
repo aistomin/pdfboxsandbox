@@ -13,8 +13,6 @@ import org.apache.pdfbox.util.PDFTextStripperByArea;
  * <p>
  * Class that demonstrates how to decrypt PDF files and read the content their
  * content.
- *
- * @TODO: Add comments and cleanup the code.
  */
 public final class DecryptDemo {
 
@@ -27,6 +25,7 @@ public final class DecryptDemo {
     public static void main(final String[] args) throws Exception {
         printFileInfo(resourceFile("not-encrypted.pdf"), null);
         printFileInfo(resourceFile("encrypted.pdf"), "bach");
+//        printFileInfo(resourceFile("path_to_your_file"), "your_password");
     }
 
     /**
@@ -47,14 +46,47 @@ public final class DecryptDemo {
             String.format("IS ENCRYPTED: %b", doc.isEncrypted())
         );
         if (doc.isEncrypted()) {
-            doc.decrypt(password);
-            doc.setAllSecurityToBeRemoved(true);
-            doc.save(
-                String.format("target/%s.pdf", UUID.randomUUID().toString())
+            System.out.println(
+                String.format(
+                    "The document %s is encrypted. Let's try to decrypt it.",
+                    file.getAbsolutePath()
+                )
+            );
+            decrypt(doc, password);
+            System.out.println(
+                String.format(
+                    "The document %s is decrypted.", file.getAbsolutePath()
+                )
             );
         }
-        System.out.println(String.format("CONTENT OF THE FILE:\n%s", loadText(doc)));
-        System.out.println("*******************************************************\n\n");
+        System.out.println(
+            String.format("CONTENT OF THE FILE:\n%s", loadText(doc))
+        );
+        System.out.println(
+            "***********************************************\n\n"
+        );
+    }
+
+    /**
+     * Decrypt the PDF document.
+     *
+     * @param doc      The document.
+     * @param password The password.
+     * @throws Exception If something goes wrong :)
+     */
+    private static void decrypt(
+        final PDDocument doc, final String password
+    ) throws Exception {
+        if (password == null) {
+            throw new NullPointerException(
+                "Password is required for the encrypted document."
+            );
+        }
+        doc.decrypt(password);
+        doc.setAllSecurityToBeRemoved(true);
+        doc.save(
+            String.format("target/%s.pdf", UUID.randomUUID().toString())
+        );
     }
 
     /**
