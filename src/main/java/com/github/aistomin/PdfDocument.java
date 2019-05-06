@@ -10,10 +10,11 @@ import org.apache.pdfbox.util.PDFTextStripperByArea;
 /**
  * Created by aistomin on 2019-05-05.
  * <p>
- * Class that can read the text from the PDF file.
+ * Class that represents PDF document. Using this class you can read the content
+ * of the PDF file.
  */
 @SuppressWarnings("WeakerAccess")
-public final class PdfReader {
+public final class PdfDocument {
 
     /**
      * The PDF file.
@@ -31,7 +32,7 @@ public final class PdfReader {
      * @param pdf      The PDF file.
      * @param password Optional password in case the file is encrypted.
      */
-    public PdfReader(final File pdf, final String password) {
+    public PdfDocument(final File pdf, final String password) {
         this.pdf = pdf;
         this.password = password;
     }

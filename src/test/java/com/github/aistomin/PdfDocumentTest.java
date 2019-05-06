@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Created by aistomin on 2019-05-05.
  * <p>
- * The tests for {@link PdfReader}
+ * The tests for {@link PdfDocument}
  */
-final class PdfReaderTest {
+final class PdfDocumentTest {
 
     private final String expectedText = "Bourrée in E minor pg. 2/2";
 
@@ -22,10 +22,10 @@ final class PdfReaderTest {
     @Test
     void testReadNonEncryptedFile() throws Exception {
         final String pdf = "not-encrypted.pdf";
-        final URL resource = PdfBoxDemo.class.getClassLoader()
+        final URL resource = getClass().getClassLoader()
             .getResource(pdf);
         Assertions.assertNotNull(resource);
-        final String text = new PdfReader(
+        final String text = new PdfDocument(
             new File(resource.getFile()), null
         ).read();
         Assertions.assertNotNull(text);
@@ -40,10 +40,10 @@ final class PdfReaderTest {
     @Test
     void testReadEncryptedFile() throws Exception {
         final String pdf = "encrypted.pdf";
-        final URL resource = PdfBoxDemo.class.getClassLoader()
+        final URL resource = getClass().getClassLoader()
             .getResource(pdf);
         Assertions.assertNotNull(resource);
-        final String text = new PdfReader(
+        final String text = new PdfDocument(
             new File(resource.getFile()), "bach"
         ).read();
         Assertions.assertNotNull(text);

@@ -29,7 +29,7 @@ public final class PdfBoxDemo {
             );
         }
         final File file = new File(resource.getFile());
-        final String text = new PdfReader(file, "bach").read();
+        final String text = new PdfDocument(file, "bach").read();
         System.out.println(
             String.format(
                 "CONTENT OF THE FILE %s:\n%s", file.getAbsolutePath(), text
